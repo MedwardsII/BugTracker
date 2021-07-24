@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="fw-bold fs-2 mt-3 mb-3 ms-4 text-decoration-underline">Creating: <em>New Ticket</em></div>
+{% include "tickets/includes/ticket_create_form.html" %}
+{% endblock %}

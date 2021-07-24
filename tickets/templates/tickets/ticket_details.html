@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load ticket_filter %}
+{% block content %}
+<div class="fw-bold fs-2 mt-3 mb-3 ms-4 text-decoration-underline"> Viewing Details: Ticket #<em>{{ request.path|page_name }}</em></div>
+{% include "tickets/includes/ticket_details_display.html" %}
+<ul class="list-group ms-4 me-4 mb-3">
+    <div>
+        <a role="link" href="{% url 'tickets:create_comment' ticket.pk %}" class="fs-5"><em>Create Comment</em></a>
+    </div>
+    {% include "tickets/includes/ticket_comments_display.html" %}
+</ul>
+{% endblock %}

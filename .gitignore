@@ -1,0 +1,8 @@
+__pycache__
+static/
+production.conf
+migrations
+db.sqlite3
+templates/registration/password_*
+service-conf/
+test_ticket_helper_functions.py

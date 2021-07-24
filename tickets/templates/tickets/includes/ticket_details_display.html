@@ -1,0 +1,25 @@
+<ul class="list-group ms-4 me-4 fs-5">
+    <li class="list-group-item">
+        <span class="text-info">Ticket ID: </span> <span>{{ ticket.id }}</span><br>
+        <span class="text-info">Title: </span> <span>{{ ticket.title }}</span><br>
+        <span class="text-info">Description: </span> <span>{{ ticket.description }}</span><br>
+        <span class="text-info">Request Type: </span> <span>{{ ticket.request_type }}</span><br>
+        <span class="text-info">Project: </span> <span>{{ ticket.project }}</span><br>
+        <span class="text-info">Is Complete: </span> <span>{{ ticket.is_resolved }}</span><br>
+        <span class="text-info">Priority Level: </span> <span>{{ ticket.priority }}</span><br>
+        <span class="text-info">Created By: </span> <span>{{ ticket.creator }}</span><br>
+        {% if assignment %}
+        <span class="text-info">Assigned Agent: </span> <span>{{ assignment.assigned_user }}</span><br>
+        {% else %}
+        <span class="text-info">Assigned Agent: </span> <span>Pending</span><br>
+        {% endif %}
+        <span class="text-info">Created On: </span> <span>{{ ticket.created_on }}</span><br>
+        <span class="text-info">Last Updated On: </span> <span>{{ ticket.last_updated }}</span><br>
+        {% if 'comment' not in request.path and 'update' not in request.path %}
+        <div class="ms-1 mt-3 mb-2">
+            <a class="btn btn-outline-primary" role="button" href="{% url 'tickets:list_all' %}" >Back</a>
+            <a class="btn btn-outline-primary" role="button" href="{% url 'tickets:update_ticket' ticket.pk %}" >Edit</a>
+        </div>
+        {% endif %}
+    </li><br>
+</ul>

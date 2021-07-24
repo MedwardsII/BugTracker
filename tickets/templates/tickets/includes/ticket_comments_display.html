@@ -1,0 +1,15 @@
+{% load ticket_filter %}
+<div class="">
+    <div class="fs-6">
+        <p>{{ ticket|get_comments|length }} Comment(s)</p>
+    </div>
+    {% for comment in ticket|get_comments %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            <span class="text-info">Comment: </span> <span>{{ comment.comment }}</span><br>
+            <span class="text-info">Agent: </span> <span>{{ comment.creator }}</span><br>
+            <span class="text-info">Posted: </span> <span>{{ comment.created_on }}</span><br>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
