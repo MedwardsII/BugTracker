@@ -1,12 +1,14 @@
+'''Module to test views'''
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import AnonymousUser, User
-from tickets.models import Ticket, Project
 from django.contrib.sessions.middleware import SessionMiddleware
+from tickets.models import Ticket, Project
 from tickets.views import CommentCreateView, TicketListView, TicketResolvedListView, \
     TicketCreateView, TicketDetailView, TicketUpdateView
 
 
 class TestTicketListView(TestCase):
+    '''Test the ticket list view.'''
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='testuser',
@@ -26,6 +28,7 @@ class TestTicketListView(TestCase):
         self.assertEquals(response.status_code, 200)
 
 class TestTicketDetailView(TestCase):
+    '''Test the ticket detail view.'''
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='testuser',
@@ -53,7 +56,8 @@ class TestTicketDetailView(TestCase):
         response = TicketDetailView.as_view()(request, pk=self.ticket.pk)
         self.assertEquals(response.status_code, 200)
 
-class TestTicketArchivedView(TestCase):
+class TestTicketPendingView(TestCase):
+    '''Test the ticket list pending view.'''
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='testuser',
@@ -73,6 +77,7 @@ class TestTicketArchivedView(TestCase):
         self.assertEquals(response.status_code, 200)
 
 class TestTicketCreateView(TestCase):
+    '''Test the ticket create view.'''
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='testuser',
@@ -97,6 +102,7 @@ class TestTicketCreateView(TestCase):
         self.assertEquals(response.status_code, 200)
     
 class TestTicketCommentCreateView(TestCase):
+    '''Test the ticket comment create view.'''
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='testuser',
@@ -128,6 +134,7 @@ class TestTicketCommentCreateView(TestCase):
         self.assertEquals(response.status_code, 200)
 
 class TestTicketUpdateView(TestCase):
+    '''Test the ticket update view.'''
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='testuser',

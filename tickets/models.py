@@ -1,29 +1,38 @@
-from typing import Callable
+'''Models Module'''
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.deletion import CASCADE
-from django.db.models.fields.related import ForeignKey
+
 
 # Create your models here.
 class Project(models.Model):
+    '''Project class model'''
     title = models.CharField(
         max_length=50
     )
+
     def __str__(self):
-        return self.title
+        return str(self.title)
+
 
 class Ticket(models.Model):
+    '''Ticket class model'''
     class PriorityLevel(models.TextChoices):
+        '''Priority level class'''
         LOW = 'Low'
         URGENT = 'Urgent'
         CRITICAL = 'Critical'
+
     class ResolutionText(models.TextChoices):
-        YES = 'Yes',
+        '''Resolution text class'''
+        YES = 'Yes'
         NO = 'No'
+
     class RequestType(models.TextChoices):
-        BUG = 'Bug',
-        RECOMMEND = 'Recommend',
+        '''Request type class'''
+        BUG = 'Bug'
+        RECOMMEND = 'Recommend'
         HELP = 'Help'
+
     title = models.CharField(
         max_length=200
     )
@@ -61,12 +70,15 @@ class Ticket(models.Model):
     )
     creator = models.ForeignKey(
         User,
-        on_delete=CASCADE
+        on_delete=models.CASCADE
     )
+
     def __str__(self):
-        return self.title
+        return str(self.title)
+
 
 class TicketComment(models.Model):
+    '''Ticket comment model class'''
     comment = models.TextField(
         max_length=500
     )
@@ -83,12 +95,14 @@ class TicketComment(models.Model):
         help_text='Date ticket was created.'
     )
 
+
 class TicketAssignment(models.Model):
+    '''Ticket assignment class model'''
     assigned_user = models.ForeignKey(
         User,
-        on_delete=CASCADE
+        on_delete=models.CASCADE
     )
     ticket = models.OneToOneField(
         Ticket,
-        on_delete=CASCADE
+        on_delete=models.CASCADE
     )

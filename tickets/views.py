@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.views import View
@@ -30,7 +29,7 @@ class TicketNeedAssignmentListView(TicketListView):
     queryset = Ticket.objects.filter(
             is_resolved='No'
         ).exclude(ticketassignment__ticket=F('pk'))
-    
+
 @method_decorator(login_required, name='dispatch')
 class TicketAssignedListView(TicketListView):
     def get_queryset(self):
@@ -43,7 +42,7 @@ class TicketDetailView(DetailView):
     template_name = 'tickets/ticket_details.html'
     queryset = Ticket.objects.all()
     context_object_name = 'ticket'
-    
+
     def get_context_data(self, **kwargs):
         '''Query of viewed ticket'''
         context = super().get_context_data(**kwargs)
@@ -97,7 +96,7 @@ class TicketUpdateView(UpdateView):
         if form.is_valid():
             if form.cleaned_data['is_resolved'] == 'Yes':
                 destroy_assignment(ticket)
- 
+
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -144,7 +143,7 @@ class CommentCreateView(CreateView):
 class FormSuccessView(View):
     template_name = 'tickets/ticket_created_success.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         data = {
             'success_message': 'Entry submitted successful!',
             'page_name': 'Ticket Submission'

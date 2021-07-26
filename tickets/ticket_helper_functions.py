@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+'''Module of functions to assist in additional view operations'''
 from .models import TicketAssignment
 
 

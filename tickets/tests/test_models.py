@@ -1,13 +1,12 @@
+'''Test module for models'''
 from time import time
-from django.contrib.auth import authenticate
 from django.test import TestCase
 from django.contrib.auth.models import User
-from rest_framework import response
 from tickets.models import Ticket, Project, TicketComment, TicketAssignment
 
 
 class TestProjectModel(TestCase):
-    '''Test the ticket model.'''
+    '''Test the project model.'''
     def setUp(self):
         self.project = Project(title='Project test')
     def test_create_project(self):
@@ -16,6 +15,7 @@ class TestProjectModel(TestCase):
         self.assertEquals(str(self.project), 'Project test')
 
 class TestTicketModel(TestCase):
+    '''Test the ticket model.'''
     def setUp(self):
         self.test_user = User(username='Test User', email='test@testmail.net')
         self.project = Project(title='Project test')
@@ -36,6 +36,7 @@ class TestTicketModel(TestCase):
         self.assertEquals(str(self.ticket), 'Title test')
 
 class TestTicketCommentModel(TestCase):
+    '''Test the ticket comment model.'''
     def setUp(self):
         self.test_user = User(username='Test User', email='test@testmail.net')
         self.project = Project(title='Project test')
@@ -58,6 +59,7 @@ class TestTicketCommentModel(TestCase):
         )
 
 class TestTicketAssignmentModel(TestCase):
+    '''Test the assignment model.'''
     def setUp(self):
         self.test_user = User(username='Test User', email='test@testmail.net')
         self.project = Project(title='Project test')

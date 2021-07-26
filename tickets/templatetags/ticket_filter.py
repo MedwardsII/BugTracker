@@ -1,3 +1,4 @@
+'''Templatetag filter module'''
 from django import template
 from django.contrib.auth.models import User
 from django.db.models import F
@@ -38,7 +39,7 @@ def tickets_pending_assignment(tickets):
 def complete_ticket_diff(tickets):
     '''Misc func for styling total tickets pending'''
     complete = tickets.filter(is_resolved='Yes')
-    return complete.count() // tickets.count() 
+    return complete.count() // tickets.count()
 
 @register.filter(name='tickets_assigned')
 def tickets_assigned(tickets, user):
@@ -51,7 +52,6 @@ def page_name(path):
     page_name = path.split('/')
     if 'update' in page_name:
         return page_name[3].capitalize()
-    elif 'comment' in page_name:
+    if 'comment' in page_name:
         return page_name[4].capitalize()
-    else:
-        return page_name[2].capitalize()
+    return page_name[2].capitalize()
